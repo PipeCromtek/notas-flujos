@@ -1,0 +1,44 @@
+filters:
+  and:
+    - file.hasTag("flujo")
+    - not:
+        - file.inFolder("Plantillas")
+
+properties:
+  note.estado:
+    displayName: Estado
+  note.sistemas:
+    displayName: Sistemas
+  note.horario:
+    displayName: Horario
+  note.script:
+    displayName: Script
+
+views:
+  - type: kanban
+    name: Tablero
+    groupBy:
+      property: note.estado
+      direction: ASC
+    groupOrder:
+      - idea
+      - en desarrollo
+      - activo
+      - pausado
+    order:
+      - file.name
+      - sistemas
+
+  - type: table
+    name: Todos
+    sort:
+      - property: estado
+        direction: ASC
+      - property: file.name
+        direction: ASC
+    order:
+      - file.name
+      - estado
+      - sistemas
+      - horario
+      - script
